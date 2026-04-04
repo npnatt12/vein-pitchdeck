@@ -300,14 +300,38 @@
           if (appendixTables.length) tl.from(appendixTables, { opacity: 0, y: 20, stagger: 0.15, duration: DURATION, ease: EASE }, 0.3);
         },
         onLeaveBack: function() {
-          if (slideTl) slideTl.reverse();
+          if (slideTl && window.innerWidth > 767) slideTl.reverse();
         },
         onEnterBack: function() {
-          if (slideTl) slideTl.restart();
+          if (slideTl && window.innerWidth > 767) slideTl.restart();
         }
       });
     });
 
   } // end reduced motion check
+
+  // --- Tap-to-expand for mobile images ---
+  if (window.innerWidth <= 767) {
+    var overlay = document.getElementById('expand-overlay');
+    if (overlay) {
+      document.querySelectorAll('.product-screenshot, .founder-photo').forEach(function(img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var clone = img.cloneNode(true);
+          clone.style.cursor = 'zoom-out';
+          clone.style.maxWidth = '90vw';
+          clone.style.maxHeight = '85vh';
+          overlay.innerHTML = '';
+          overlay.appendChild(clone);
+          overlay.classList.add('active');
+        });
+      });
+
+      overlay.addEventListener('click', function() {
+        overlay.classList.remove('active');
+      });
+    }
+  }
 
 })();

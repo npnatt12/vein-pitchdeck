@@ -934,7 +934,7 @@ h2 {
   line-height: 1.2;
 }
 
-.mobile-break { display: none; }
+.tagline-line1, .tagline-line2 { display: inline; }
 
 .ask-benefits {
   grid-template-columns: 1fr 1fr;
@@ -1362,7 +1362,7 @@ body.overview-mode #presenter-overlay {
   }
 
   /* Title: break "healthcare" to second line */
-  .mobile-break { display: block; }
+  .tagline-line2 { display: block; }
 
   /* Slide 10: benefits grid single column on mobile */
   .ask-benefits {
@@ -1416,6 +1416,17 @@ body.overview-mode #presenter-overlay {
     flex-direction: row;
     text-align: left;
     gap: 14px;
+  }
+
+  .pipeline-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .pipeline-desc {
+    font-size: 0.95rem;
+    max-width: none;
+    opacity: 0.8;
   }
 
   .pipeline-line {
@@ -1527,6 +1538,13 @@ body.overview-mode #presenter-overlay {
     text-overflow: unset;
     font-size: 0.72rem;
   }
+
+  /* Tap-to-expand: images become tappable on mobile */
+  .product-screenshot,
+  .founder-photo {
+    cursor: zoom-in;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
 }
 
 /* ============================================================
@@ -1563,6 +1581,42 @@ body.overview-mode #presenter-overlay {
   #progress-bar {
     transition: none;
   }
+}
+
+/* ============================================================
+   27. TAP-TO-EXPAND OVERLAY (mobile image zoom)
+   ============================================================ */
+.expand-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.expand-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.expand-overlay img {
+  max-width: 90vw;
+  max-height: 85vh;
+  border-radius: 16px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(0.85);
+  transition: transform 0.3s ease;
+}
+
+.expand-overlay.active img {
+  transform: scale(1);
 }
 
 /* ============================================================
