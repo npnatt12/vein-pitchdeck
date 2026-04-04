@@ -291,9 +291,11 @@
           var milestones = content.querySelectorAll('.milestone');
           if (milestones.length) tl.from(milestones, { opacity: 0, y: 20, stagger: STAGGER, duration: DURATION, ease: EASE }, '-=0.2');
 
-          // Product screenshots
+          // Product screenshots (skip animation on mobile — they may be below fold)
           var screenshots = content.querySelectorAll('.product-screenshot');
-          if (screenshots.length) tl.from(screenshots, { opacity: 0, scale: 0.9, y: 20, duration: DURATION, ease: EASE }, '-=0.3');
+          if (screenshots.length && window.innerWidth > 767) {
+            tl.from(screenshots, { opacity: 0, scale: 0.9, y: 20, duration: DURATION, ease: EASE }, '-=0.3');
+          }
 
           // Appendix tables
           var appendixTables = content.querySelectorAll('.appendix-table');

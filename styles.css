@@ -1348,6 +1348,10 @@ body.overview-mode #presenter-overlay {
   }
 
   /* CRITICAL: Let slides expand on mobile so content isn't clipped */
+  html {
+    scroll-snap-type: y proximity;
+  }
+
   .slide {
     min-height: 100vh;
     height: auto;
