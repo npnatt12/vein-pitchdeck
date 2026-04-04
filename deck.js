@@ -306,10 +306,12 @@
           var milestones = content.querySelectorAll('.milestone');
           if (milestones.length) tl.from(milestones, { opacity: 0, y: 20, stagger: STAGGER, duration: DURATION, ease: EASE }, '-=0.2');
 
-          // Product screenshots
-          var screenshots = content.querySelectorAll('.product-screenshot');
-          if (screenshots.length) {
-            tl.from(screenshots, { opacity: 0, scale: 0.95, y: 15, duration: DURATION, ease: EASE }, '-=0.3');
+          // Product screenshots (desktop only — on mobile they're below fold when timeline plays)
+          if (!isMobile) {
+            var screenshots = content.querySelectorAll('.product-screenshot');
+            if (screenshots.length) {
+              tl.from(screenshots, { opacity: 0, scale: 0.95, y: 15, duration: DURATION, ease: EASE }, '-=0.3');
+            }
           }
 
           // Appendix tables
