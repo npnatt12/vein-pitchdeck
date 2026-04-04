@@ -934,6 +934,12 @@ h2 {
   line-height: 1.2;
 }
 
+.mobile-break { display: none; }
+
+.ask-benefits {
+  grid-template-columns: 1fr 1fr;
+}
+
 .title-tagline .char {
   display: inline-block;
   opacity: 0;
@@ -1353,6 +1359,29 @@ body.overview-mode #presenter-overlay {
     max-height: none;
     overflow: visible;
     gap: 20px;
+  }
+
+  /* Title: break "healthcare" to second line */
+  .mobile-break { display: block; }
+
+  /* Slide 10: benefits grid single column on mobile */
+  .ask-benefits {
+    grid-template-columns: 1fr !important;
+  }
+
+  .benefit-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .benefit-text h4,
+  .benefit-body strong {
+    font-size: 0.9rem;
+  }
+
+  .benefit-text p,
+  .benefit-body p {
+    font-size: 0.8rem;
   }
 
   h2 {
