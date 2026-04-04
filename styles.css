@@ -1341,6 +1341,20 @@ body.overview-mode #presenter-overlay {
     --slide-padding: 24px;
   }
 
+  /* CRITICAL: Let slides expand on mobile so content isn't clipped */
+  .slide {
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+    scroll-snap-align: start;
+  }
+
+  .slide-content {
+    max-height: none;
+    overflow: visible;
+    gap: 20px;
+  }
+
   h2 {
     font-size: clamp(1.6rem, 6vw, 2.4rem);
   }
@@ -1363,6 +1377,7 @@ body.overview-mode #presenter-overlay {
     grid-template-columns: 1fr;
   }
 
+  /* Slide 3/7: stack vertically, show full image */
   .pipeline {
     flex-direction: column;
     gap: 16px;
@@ -1378,22 +1393,87 @@ body.overview-mode #presenter-overlay {
     display: none;
   }
 
+  .product-screenshot {
+    max-width: 220px;
+    margin: 8px auto 0;
+    display: block;
+  }
+
+  /* Slide 4: LINE callout fully visible */
+  .line-callout {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  /* Slide 5: Market circles — replace overlapping text with stacked layout */
+  .market-circles {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .market-circle .market-circle-label,
+  .market-circle .market-circle-value,
+  .market-circle .market-circle-note {
+    display: none;
+  }
+
+  .market-circle.tam::after { content: 'TAM'; position: absolute; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 6px; left: 50%; transform: translateX(-50%); }
+  .market-circle.sam::after { content: 'SAM'; position: absolute; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 4px; left: 50%; transform: translateX(-50%); }
+  .market-circle.som::after { content: 'SOM'; position: absolute; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  /* Show legend on mobile too */
+  .market-legend {
+    display: flex !important;
+    gap: 16px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .market-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  /* Slide 7: traction grid stacks */
+  .traction-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .traction-screenshot .product-screenshot {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
+  /* Slide 8: table full width, boxes below in 2x2 */
+  [data-slide="8"] .slide-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px;
+  }
+
+  [data-slide="8"] .comparable-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  [data-slide="8"] .comparable-card {
+    padding: 12px 14px;
+  }
+
   .bar-label {
     min-width: 80px;
     font-size: 0.78rem;
   }
 
-  .market-circles {
-    width: 240px;
-    height: 240px;
-  }
-
   .title-logo {
     width: 140px;
-  }
-
-  .product-screenshot {
-    max-width: 180px;
   }
 
   .meta-pills {
