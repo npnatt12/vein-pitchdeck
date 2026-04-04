@@ -1347,16 +1347,17 @@ body.overview-mode #presenter-overlay {
     --slide-padding: 24px;
   }
 
-  /* CRITICAL: Disable scroll-snap on mobile — slides are taller than viewport */
+  /* Scroll-snap proximity on mobile — snaps near boundaries, free scroll within tall slides */
   html {
-    scroll-snap-type: none !important;
+    scroll-snap-type: y proximity !important;
   }
 
   .slide {
-    min-height: auto;
+    min-height: 100vh;
     height: auto;
     overflow: visible;
-    scroll-snap-align: none;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
     padding-top: 48px;
     padding-bottom: 48px;
   }
