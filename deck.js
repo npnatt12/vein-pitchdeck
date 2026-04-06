@@ -138,8 +138,6 @@
   var COUNT_DURATION = 1.5;
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var isMobile = window.innerWidth <= 767;
-
   if (!prefersReducedMotion) {
 
     // --- Per-slide ScrollTrigger ---
@@ -151,10 +149,9 @@
       ScrollTrigger.create({
         trigger: slide,
         start: 'top 60%',
-        end: isMobile ? 'bottom top' : 'bottom 20%',
-        once: isMobile,
+        end: 'bottom 20%',
         onEnter: function() {
-          if (slideTl) { if (!isMobile) slideTl.restart(); return; }
+          if (slideTl) { slideTl.restart(); return; }
           slideTl = gsap.timeline();
           var tl = slideTl;
 
@@ -174,22 +171,10 @@
 
           var tagline = content.querySelector('.title-tagline');
           if (tagline && tagline.dataset.animate === 'typewriter') {
-            // Wrap chars inside each child span separately to preserve line break structure
-            var children = tagline.querySelectorAll('span[class^="tagline-line"]');
-            if (children.length > 0) {
-              children.forEach(function(span) {
-                var text = span.textContent;
-                span.innerHTML = text.split('').map(function(c) {
-                  return c === ' ' ? ' ' : '<span class="char">' + c + '</span>';
-                }).join('');
-              });
-            } else {
-              // Fallback: no inner spans
-              var text = tagline.textContent;
-              tagline.innerHTML = text.split('').map(function(c) {
-                return c === ' ' ? ' ' : '<span class="char">' + c + '</span>';
-              }).join('');
-            }
+            var text = tagline.textContent;
+            tagline.innerHTML = text.split('').map(function(c) {
+              return c === ' ' ? ' ' : '<span class="char">' + c + '</span>';
+            }).join('');
             tl.to(tagline.querySelectorAll('.char'), { opacity: 1, duration: 0.03, stagger: 0.02, ease: 'none' }, 0.4);
           }
 
@@ -306,51 +291,23 @@
           var milestones = content.querySelectorAll('.milestone');
           if (milestones.length) tl.from(milestones, { opacity: 0, y: 20, stagger: STAGGER, duration: DURATION, ease: EASE }, '-=0.2');
 
-          // Product screenshots (desktop only — on mobile they're below fold when timeline plays)
-          if (!isMobile) {
-            var screenshots = content.querySelectorAll('.product-screenshot');
-            if (screenshots.length) {
-              tl.from(screenshots, { opacity: 0, scale: 0.95, y: 15, duration: DURATION, ease: EASE }, '-=0.3');
-            }
-          }
+          // Product screenshots
+          var screenshots = content.querySelectorAll('.product-screenshot');
+          if (screenshots.length) tl.from(screenshots, { opacity: 0, scale: 0.9, y: 20, duration: DURATION, ease: EASE }, '-=0.3');
 
           // Appendix tables
           var appendixTables = content.querySelectorAll('.appendix-table');
           if (appendixTables.length) tl.from(appendixTables, { opacity: 0, y: 20, stagger: 0.15, duration: DURATION, ease: EASE }, 0.3);
         },
         onLeaveBack: function() {
-          if (slideTl && window.innerWidth > 767) slideTl.reverse();
+          if (slideTl) slideTl.reverse();
         },
         onEnterBack: function() {
-          if (slideTl && window.innerWidth > 767) slideTl.restart();
+          if (slideTl) slideTl.restart();
         }
       });
     });
 
   } // end reduced motion check
-
-  // --- Tap-to-expand for mobile images ---
-  if (window.innerWidth <= 767) {
-    var overlay = document.getElementById('expand-overlay');
-    if (overlay) {
-      document.querySelectorAll('.product-screenshot, .founder-photo').forEach(function(img) {
-        img.style.cursor = 'zoom-in';
-        img.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var clone = img.cloneNode(true);
-          clone.style.cursor = 'zoom-out';
-          clone.style.maxWidth = '90vw';
-          clone.style.maxHeight = '85vh';
-          overlay.innerHTML = '';
-          overlay.appendChild(clone);
-          overlay.classList.add('active');
-        });
-      });
-
-      overlay.addEventListener('click', function() {
-        overlay.classList.remove('active');
-      });
-    }
-  }
 
 })();

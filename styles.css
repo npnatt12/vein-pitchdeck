@@ -366,6 +366,12 @@ h2 {
   font-size: 0.9rem;
 }
 
+.competition-composite {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .comparison-grid th,
 .comparison-grid td {
   padding: 12px 16px;
@@ -934,12 +940,6 @@ h2 {
   line-height: 1.2;
 }
 
-.tagline-line1, .tagline-line2 { display: inline; }
-
-.ask-benefits {
-  grid-template-columns: 1fr 1fr;
-}
-
 .title-tagline .char {
   display: inline-block;
   opacity: 0;
@@ -1053,45 +1053,81 @@ h2 {
   [data-slide="7"] h2 { font-size: clamp(1.8rem, 4vw, 2.6rem) !important; }
 }
 
-/* Slide 8 (Competition): table left, 2x2 boxes right, boxes left edge ~60% */
-@media (min-aspect-ratio: 4/3) {
-  [data-slide="8"] .slide-content {
+/* Slide 8 (Competition): force desktop side-by-side layout */
+@media (min-width: 1024px) {
+  [data-slide="8"] h2 { font-size: clamp(1.8rem, 4vw, 2.6rem) !important; }
+  [data-slide="8"] .competition-composite {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 12px 20px;
-    align-items: start;
+    grid-template-columns: minmax(0, 0.82fr) minmax(360px, 1fr);
+    gap: 0;
+    align-items: stretch;
+    padding: 18px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(33, 62, 96, 0.1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(244, 242, 239, 0.88) 100%);
+    box-shadow: 0 10px 28px rgba(33, 62, 96, 0.06);
   }
-  [data-slide="8"] .eyebrow { grid-column: 1 / -1; }
-  [data-slide="8"] h2 { grid-column: 1 / -1; font-size: clamp(1.8rem, 4vw, 2.6rem) !important; }
   [data-slide="8"] .comparison-grid {
-    grid-column: 1;
-    grid-row: 3;
-    font-size: 1rem !important;
+    min-width: 0;
+    font-size: 0.84rem !important;
+    padding-right: 18px;
+    border-right: 1px solid rgba(33, 62, 96, 0.08);
+  }
+  [data-slide="8"] .comparison-grid table {
+    width: 100%;
+    table-layout: fixed;
   }
   [data-slide="8"] .comparison-grid th,
-  [data-slide="8"] .comparison-grid td { padding: 8px 12px; }
+  [data-slide="8"] .comparison-grid td { padding: 8px 11px; }
   [data-slide="8"] .comparables {
-    grid-column: 2;
-    grid-row: 3;
-    margin-top: 0;
+    align-self: stretch;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding-left: 18px;
+    margin: 0;
   }
   [data-slide="8"] .comparables .comparables-label {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    color: var(--navy-muted);
   }
   [data-slide="8"] .comparable-cards {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+    width: 100%;
   }
   [data-slide="8"] .comparable-card {
-    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-height: 82px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(33, 62, 96, 0.08);
+    box-shadow: none;
   }
-  [data-slide="8"] .comparable-name { font-size: 1.05rem !important; }
-  [data-slide="8"] .comparable-value { font-size: 1.3rem !important; }
+  [data-slide="8"] .comparable-name {
+    font-size: 0.9rem !important;
+    line-height: 1.2;
+  }
+  [data-slide="8"] .comparable-value {
+    font-size: 0.98rem !important;
+    line-height: 1.15;
+    white-space: normal;
+    text-align: left;
+  }
+  [data-slide="8"] .comparable-tag {
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
 }
 
 /* ============================================================
@@ -1347,50 +1383,6 @@ body.overview-mode #presenter-overlay {
     --slide-padding: 24px;
   }
 
-  /* Scroll-snap proximity on mobile — snaps near boundaries, free scroll within tall slides */
-  html {
-    scroll-snap-type: y proximity !important;
-  }
-
-  .slide {
-    min-height: 100vh;
-    height: auto;
-    overflow: visible;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
-
-  .slide-content {
-    max-height: none;
-    overflow: visible;
-    gap: 20px;
-  }
-
-  /* Title: break "healthcare" to second line */
-  .tagline-line2 { display: block; }
-
-  /* Slide 10: benefits grid single column on mobile */
-  .ask-benefits {
-    grid-template-columns: 1fr !important;
-  }
-
-  .benefit-card {
-    padding: 14px 16px;
-    gap: 12px;
-  }
-
-  .benefit-text h4,
-  .benefit-body strong {
-    font-size: 0.9rem;
-  }
-
-  .benefit-text p,
-  .benefit-body p {
-    font-size: 0.8rem;
-  }
-
   h2 {
     font-size: clamp(1.6rem, 6vw, 2.4rem);
   }
@@ -1413,7 +1405,6 @@ body.overview-mode #presenter-overlay {
     grid-template-columns: 1fr;
   }
 
-  /* Slide 3/7: stack vertically, show full image */
   .pipeline {
     flex-direction: column;
     gap: 16px;
@@ -1425,93 +1416,8 @@ body.overview-mode #presenter-overlay {
     gap: 14px;
   }
 
-  .pipeline-label {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-
-  .pipeline-desc {
-    font-size: 0.95rem;
-    max-width: none;
-    opacity: 0.8;
-  }
-
   .pipeline-line {
     display: none;
-  }
-
-  .product-screenshot {
-    max-width: 220px;
-    margin: 8px auto 0;
-    display: block;
-  }
-
-  /* Slide 4: LINE callout fully visible */
-  .line-callout {
-    flex-direction: column;
-    gap: 12px;
-    padding: 16px 20px;
-  }
-
-  /* Slide 5: Market circles — replace overlapping text with stacked layout */
-  .market-circles {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-  }
-
-  .market-circle .market-circle-label,
-  .market-circle .market-circle-value,
-  .market-circle .market-circle-note {
-    display: none;
-  }
-
-  .market-circle.tam::after { content: 'TAM'; position: absolute; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 6px; left: 50%; transform: translateX(-50%); }
-  .market-circle.sam::after { content: 'SAM'; position: absolute; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 4px; left: 50%; transform: translateX(-50%); }
-  .market-circle.som::after { content: 'SOM'; position: absolute; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.08em; opacity: 0.5; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-  /* Show legend on mobile too */
-  .market-legend {
-    display: flex !important;
-    gap: 16px;
-    text-align: center;
-    align-items: center;
-  }
-
-  .market-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  /* Slide 7: traction grid stacks */
-  .traction-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .traction-screenshot .product-screenshot {
-    max-width: 220px;
-    margin: 0 auto;
-  }
-
-  /* Slide 8: table full width, boxes below in 2x2 */
-  [data-slide="8"] .slide-content {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px;
-  }
-
-  [data-slide="8"] .comparable-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  [data-slide="8"] .comparable-card {
-    padding: 12px 14px;
   }
 
   .bar-label {
@@ -1519,8 +1425,17 @@ body.overview-mode #presenter-overlay {
     font-size: 0.78rem;
   }
 
+  .market-circles {
+    width: 240px;
+    height: 240px;
+  }
+
   .title-logo {
     width: 140px;
+  }
+
+  .product-screenshot {
+    max-width: 180px;
   }
 
   .meta-pills {
@@ -1544,13 +1459,6 @@ body.overview-mode #presenter-overlay {
     overflow: visible;
     text-overflow: unset;
     font-size: 0.72rem;
-  }
-
-  /* Tap-to-expand: images become tappable on mobile */
-  .product-screenshot,
-  .founder-photo {
-    cursor: zoom-in;
-    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 }
 
@@ -1588,42 +1496,6 @@ body.overview-mode #presenter-overlay {
   #progress-bar {
     transition: none;
   }
-}
-
-/* ============================================================
-   27. TAP-TO-EXPAND OVERLAY (mobile image zoom)
-   ============================================================ */
-.expand-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  cursor: zoom-out;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.expand-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.expand-overlay img {
-  max-width: 90vw;
-  max-height: 85vh;
-  border-radius: 16px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-  transform: scale(0.85);
-  transition: transform 0.3s ease;
-}
-
-.expand-overlay.active img {
-  transform: scale(1);
 }
 
 /* ============================================================
