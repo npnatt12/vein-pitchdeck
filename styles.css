@@ -404,6 +404,8 @@ h2 {
   border-top: 2px solid var(--blue);
   border-radius: 8px 8px 0 0;
   padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .comparison-grid th:nth-child(2) {
@@ -1602,8 +1604,10 @@ body.overview-mode #presenter-overlay {
    TABLE VEIN LOGO (Slide 8 — Competition table header)
    ============================================================ */
 .table-vein-logo {
-  height: 50px;
+  height: 58px;
   max-width: 100%;
   vertical-align: middle;
   object-fit: contain;
+  display: block;
+  margin: 0 auto;
 }
