@@ -59,6 +59,26 @@ Drop the entire `vein-pitchdeck/` folder on any static host:
 - Netlify: drag-and-drop
 - GitHub Pages: push to repo
 
+## Changelog
+
+### 2026-04-13 — VentureSpark Tailoring (LINE Research Integration)
+
+Tailored the deck for the VentureSpark + LINE SCALE UP event using findings from Palm's 17-group LINE staffing market analysis (37K posted shifts, 8 months of data).
+
+**Global:**
+- Added vein logo to top-left of slides 2-15 (ivory on dark, navy on light backgrounds)
+
+**Content changes:**
+- **Slide 2 (Problem):** Removed 30-40% agency markup stat; updated research quote from "289K lines / 5 groups" to "37K posted shifts / 17 LINE groups / 8 months"
+- **Slide 3 (Solution):** "Verified" → "On-demand" header; replaced screenshot with new UI
+- **Slide 4 (Why Now):** Removed "LINE is the distribution unlock" callout
+- **Slide 6 (Business Model):** Added "(nurse job only)" to Avg shift and Revenue/shift labels; added scaling points (AI/automation, scalability, volume, data-driven)
+- **Slide 7 (Traction):** Streamlined from 8 to 5 bullets; updated competitive intelligence text; added survey bullet
+- **Slide 8 (Competition):** Replaced "vein" text with logo in table header; "LINE Groups" → "LINE Groups/Webboard"
+- **Slide 10 (The Ask):** Rewrote 4 benefit cards with LINE research data anchors; removed milestones timeline
+- **Slide 11 (A1):** Added clarifying subtitle linking demand drivers to TAM/SAM/SOM
+- **Slide 12 (A2):** Removed Health at Home (defunct); added V Nurse Care
+
 ## Tech
 
 - Vanilla HTML/CSS/JS (no build step)
