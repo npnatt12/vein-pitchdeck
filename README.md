@@ -1,5 +1,8 @@
 # vein — Pitch Deck
 
+> **Company facts:** read [COMPANY-CONTEXT.md](COMPANY-CONTEXT.md) before reusing identity, founder, product, pricing or traction claims. This deck/rehearsal is a historical artifact, not current company truth.
+
+
 Cinematic HTML pitch deck for Vein's Venture Spark x LINE SCALE UP Cohort 2 interview.
 
 ## Quick Start
